@@ -13,8 +13,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: AppTheme.lightTheme,
-      home: const Scaffold(
+      home: Scaffold(
           backgroundColor: Colors.white,
+          appBar: AppBar(
+            title: const Text('This is poggers'),
+          ),
         ),
     );
   }
