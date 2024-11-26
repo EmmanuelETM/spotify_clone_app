@@ -6,7 +6,7 @@ import 'package:spotify_clone_app/common/widgets/button/basic_app_button.dart';
 import 'package:spotify_clone_app/core/configs/assets/app_images.dart';
 import 'package:spotify_clone_app/core/configs/assets/app_vectors.dart';
 import 'package:spotify_clone_app/core/configs/theme/app_colors.dart';
-import 'package:spotify_clone_app/presentation/auth/pages/sign_up.dart';
+import 'package:spotify_clone_app/presentation/auth/pages/auth_page.dart';
 import 'package:spotify_clone_app/presentation/choose_theme/bloc/theme_cubit.dart';
 
 class ChooseThemePage extends StatelessWidget {
@@ -143,7 +143,7 @@ class ChooseThemePage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (BuildContext context) => const SignUpPage(),
+                          builder: (BuildContext context) => const AuthPage(),
                         ),
                       );
                     }, 
