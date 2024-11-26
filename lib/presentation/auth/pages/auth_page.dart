@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:spotify_clone_app/common/widgets/appbar/app_bar.dart';
 import 'package:spotify_clone_app/common/widgets/button/basic_app_button.dart';
+import 'package:spotify_clone_app/common/helpers/is_dark_theme.dart';
 import 'package:spotify_clone_app/core/configs/assets/app_images.dart';
 import 'package:spotify_clone_app/core/configs/assets/app_vectors.dart';
 import 'package:spotify_clone_app/core/configs/theme/app_colors.dart';
@@ -13,6 +15,7 @@ class AuthPage extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
+          const BasicAppBar(),
           Align(
             alignment: Alignment.topRight,
             child: SvgPicture.asset(
@@ -77,12 +80,12 @@ class AuthPage extends StatelessWidget {
                         flex: 1,
                         child: TextButton(
                           onPressed: () {}, 
-                          child: const Text(
+                          child: Text(
                             'Sign In',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
-                              color: Colors.white,
+                              color: context.isDarkTheme ? Colors.white : Colors.black,
                             ),
                           ),
                         ),
