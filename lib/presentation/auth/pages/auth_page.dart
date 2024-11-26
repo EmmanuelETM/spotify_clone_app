@@ -6,6 +6,8 @@ import 'package:spotify_clone_app/common/helpers/is_dark_theme.dart';
 import 'package:spotify_clone_app/core/configs/assets/app_images.dart';
 import 'package:spotify_clone_app/core/configs/assets/app_vectors.dart';
 import 'package:spotify_clone_app/core/configs/theme/app_colors.dart';
+import 'package:spotify_clone_app/presentation/auth/pages/sign_in.dart';
+import 'package:spotify_clone_app/presentation/auth/pages/sign_up.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
@@ -71,7 +73,14 @@ class AuthPage extends StatelessWidget {
                       Expanded(
                         flex: 1,
                         child: BasicAppButton(
-                          onPressed: () {}, 
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) => const SignUpPage(),
+                                ),
+                            );
+                          }, 
                           title: 'Register'
                         ),
                       ),
@@ -79,7 +88,14 @@ class AuthPage extends StatelessWidget {
                       Expanded(
                         flex: 1,
                         child: TextButton(
-                          onPressed: () {}, 
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) => const SignInPage(),
+                                ),
+                            );
+                          }, 
                           child: Text(
                             'Sign In',
                             style: TextStyle(

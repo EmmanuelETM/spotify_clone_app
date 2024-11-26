@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:spotify_clone_app/common/helpers/is_dark_theme.dart';
 
-class BasicAppBar extends StatelessWidget {
-  const BasicAppBar({super.key});
+class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final Widget? title;
+  const BasicAppBar({
+    super.key,
+    this.title,
+  });
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
+      title: title ?? const Text(''),
+      centerTitle: true,
       leading: IconButton(
         onPressed: () {
           Navigator.pop(context);
@@ -29,4 +35,8 @@ class BasicAppBar extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+
 }
