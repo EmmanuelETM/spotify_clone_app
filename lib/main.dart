@@ -1,21 +1,28 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:spotify_clone_app/core/configs/theme/app_theme.dart';
+import 'package:spotify_clone_app/firebase_options.dart';
 import 'package:spotify_clone_app/presentation/choose_theme/bloc/theme_cubit.dart';
 import 'package:spotify_clone_app/presentation/splash/pages/splash.dart';
+import 'package:spotify_clone_app/service_locator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Create the storage for HydratedBloc
   final storage = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),
   );
 
-  // Set the storage for HydratedBloc globally
   HydratedBloc.storage = storage;
+  
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform, // Only if you have this options file
+  );
+
+  await initializeDependencies();
 
   runApp(const MyApp());
 }
