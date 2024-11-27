@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:spotify_clone_app/common/widgets/appbar/app_bar.dart';
 import 'package:spotify_clone_app/common/widgets/button/basic_app_button.dart';
 import 'package:spotify_clone_app/core/configs/assets/app_vectors.dart';
+import 'package:spotify_clone_app/presentation/auth/pages/sign_up.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
@@ -36,7 +37,7 @@ class SignInPage extends StatelessWidget {
               onPressed: () {
 
               }, 
-              title: 'Create Account'
+              title: 'Sign In'
             ),
            const SizedBox(height: 20),
           ],
@@ -92,7 +93,14 @@ class SignInPage extends StatelessWidget {
             ),
           ),
           TextButton(
-            onPressed: (){}, 
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) => const SignUpPage()
+                ),
+              );
+            },
             child: const Text(
               'Create an Account',
               style: TextStyle(
@@ -106,4 +114,3 @@ class SignInPage extends StatelessWidget {
   }
 }
 
-// 1:46:42
