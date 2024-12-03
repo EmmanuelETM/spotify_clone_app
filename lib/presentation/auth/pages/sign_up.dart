@@ -4,7 +4,7 @@ import 'package:spotify_clone_app/common/widgets/appbar/app_bar.dart';
 import 'package:spotify_clone_app/common/widgets/button/basic_app_button.dart';
 import 'package:spotify_clone_app/core/configs/assets/app_vectors.dart';
 import 'package:spotify_clone_app/data/models/auth/create_user_req.dart';
-import 'package:spotify_clone_app/domain/useCases/auth/signup.dart';
+import 'package:spotify_clone_app/domain/useCases/auth/signUp.dart';
 import 'package:spotify_clone_app/presentation/auth/pages/sign_in.dart';
 import 'package:spotify_clone_app/presentation/root/root.dart';
 import 'package:spotify_clone_app/service_locator.dart';
@@ -19,6 +19,7 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       bottomNavigationBar: _signinText(context),
       appBar: BasicAppBar(
         title: SvgPicture.asset(
@@ -140,7 +141,7 @@ class SignUpPage extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (BuildContext context) => const SignInPage()
+                  builder: (BuildContext context) => SignInPage()
                 ),
               );
             },
