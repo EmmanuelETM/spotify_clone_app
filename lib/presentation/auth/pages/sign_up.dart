@@ -3,14 +3,23 @@ import 'package:flutter_svg/svg.dart';
 import 'package:spotify_clone_app/common/widgets/appbar/app_bar.dart';
 import 'package:spotify_clone_app/common/widgets/button/basic_app_button.dart';
 import 'package:spotify_clone_app/core/configs/assets/app_vectors.dart';
+import 'package:spotify_clone_app/data/models/auth/create_user_req.dart';
+import 'package:spotify_clone_app/domain/useCases/auth/signUp.dart';
 import 'package:spotify_clone_app/presentation/auth/pages/sign_in.dart';
+import 'package:spotify_clone_app/presentation/root/root.dart';
+import 'package:spotify_clone_app/service_locator.dart';
 
 class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+  SignUpPage({super.key});
+
+  final TextEditingController _fullname = TextEditingController();
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       bottomNavigationBar: _signinText(context),
       appBar: BasicAppBar(
         title: SvgPicture.asset(
@@ -36,8 +45,27 @@ class SignUpPage extends StatelessWidget {
             _passwordField(context),
             const SizedBox(height: 20),
             BasicAppButton(
-              onPressed: () {
-
+              onPressed: () async {
+                var result = await sl<SignUpUseCase>().call(
+                  params: CreateUserReq(
+                    fullName: _fullname.text.toString(), 
+                    email: _email.text.toString(),
+                    password: _password.text.toString(),
+                  ),
+                );
+                result.fold(
+                  (l){
+                    var snackBar = SnackBar(content: Text(l));
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  },
+                  (r){
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (BuildContext context) => const RootPage()),
+                      (route) => false
+                    );
+                  }
+                );
               }, 
               title: 'Create Account'
             ),
@@ -61,6 +89,7 @@ class SignUpPage extends StatelessWidget {
 
   Widget _fullNameField(BuildContext context) {
     return TextField(
+      controller: _fullname,
       decoration: const InputDecoration(
         hintText: 'Full Name',
       ).applyDefaults(
@@ -72,6 +101,7 @@ class SignUpPage extends StatelessWidget {
 
     Widget _emailField(BuildContext context) {
       return TextField(
+        controller: _email,
         decoration: const InputDecoration(
           hintText: 'Enter email',
         ).applyDefaults(
@@ -82,6 +112,7 @@ class SignUpPage extends StatelessWidget {
 
   Widget _passwordField(BuildContext context) {
     return TextField(
+      controller: _password,
       decoration: const InputDecoration(
         hintText: 'Password',
       ).applyDefaults(
@@ -110,7 +141,7 @@ class SignUpPage extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (BuildContext context) => const SignInPage()
+                  builder: (BuildContext context) => SignInPage()
                 ),
               );
             },
